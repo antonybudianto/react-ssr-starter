@@ -8,9 +8,7 @@ const NotFoundPage = () => (
     <Helmet>
       <meta name="robots" content="noindex, nofollow" />
     </Helmet>
-    <div>
-      Sorry, Page Not found
-    </div>
+    <div>Sorry, Page Not found</div>
   </RouterStatus>
 )
 
