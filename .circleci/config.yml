@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:8.9.3
+    working_directory: ~/egold-frontend
+    steps:
+      - checkout
+      - run:
+          name: "Checking Versions"
+          command: |
+            node --version
+            npm --version
+      - run:
+          name: npm install
+          command : npm install
+      - run:
+          name: npm run lint && npm test
+          command: npm run lint && npm test
+      - run:
+          name: npm run deploy:prod
+          command: npm run deploy:prod
