@@ -40,19 +40,6 @@ const config = {
     chunkModules: true,
     colors: true
   },
-  compiler_vendors: [
-    // 'babel-polyfill',
-    // 'raf/polyfill'
-    // 'react',
-    // 'react-dom',
-    // 'react-redux',
-    // 'react-router-dom',
-    // 'react-router-config',
-    // 'redux',
-    // 'redux-thunk',
-    // 'prop-types',
-    // 'axios'
-  ],
 
   // ----------------------------------
   // Test Configuration
@@ -77,32 +64,11 @@ Edit at Your Own Risk
 // ------------------------------------
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
-  // 'process.env'  : {
-  //   'NODE_ENV' : JSON.stringify(config.env),
-  //   'PORT'     : config.serverPort
-  // },
   'process.env.NODE_ENV': JSON.stringify(config.env),
-  NODE_ENV: config.env,
   __DEV__: config.env === 'development',
   __STAG__: config.env === 'staging',
   __PROD__: config.env === 'production'
 }
-
-// ------------------------------------
-// Validate Vendor Dependencies
-// ------------------------------------
-// const pkg = require('../package.json')
-
-// config.compiler_vendors = config.compiler_vendors
-//   .filter((dep) => {
-//     if (pkg.dependencies[dep]) return true
-
-//     debug(
-//       `Package "${dep}" was not found as an npm dependency in package.json; ` +
-//       `it won't be included in the webpack vendor bundle.
-//        Consider removing it from \`compiler_vendors\` in ~/config/index.js`
-//     )
-//   })
 
 // ------------------------------------
 // Utilities
