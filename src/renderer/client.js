@@ -20,3 +20,7 @@ loadComponents().then(() => {
     document.querySelector('#root')
   )
 })
+
+if (module.hot) {
+  module.hot.accept()
+}

@@ -22,6 +22,24 @@ const logger = morgan(loggerEnv, {
 
 app.use(logger)
 
+let devAssets = {
+  appJs: '',
+  vendorJs: '',
+  appCss: ''
+}
+
+if (__DEV__) {
+  var webpack = require('webpack')
+  var webpackConfig = require('../../config/webpack.client.config.babel')
+  var compiler = webpack(webpackConfig)
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    serverSideRender: true,
+    publicPath: webpackConfig.output.publicPath
+  }))
+  app.use(require('webpack-hot-middleware')(compiler))
+}
+
 if (__DEV__) {
   const backendUrl = process.env.BACKEND_URL
   console.log('BACKEND_URL = ' + backendUrl)
@@ -41,13 +59,20 @@ if (__DEV__) {
 
 const port = project.serverPort
 
-if (__DEV__) {
-  console.log('reload is on')
-  const reload = require('reload')
-  reload(app)
-}
+// if (__DEV__) {
+//   console.log('reload is on')
+//   const reload = require('reload')
+//   reload(app)
+// }
 
 app.get(HOME_PATH + '(*)', (req, res) => {
+  if (__DEV__) {
+    const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName
+    devAssets.appJs = assetsByChunkName.app.find(f => /^app(\.[a-z0-9]+)?\.js$/.test(f))
+    devAssets.appCss = assetsByChunkName.app.find(f => /^app(\.[a-z0-9]+)?\.css$/.test(f))
+    devAssets.vendorJs = assetsByChunkName.vendor.find(f => /^vendor(\.[a-z0-9]+)?\.js$/.test(f))
+  }
+
   const store = createStore()
   // attach cookies to store object as a way to let cookies to be passed into server fetching
   req.headers.cookie && (store['cookies'] = req.headers.cookie)
@@ -56,7 +81,7 @@ app.get(HOME_PATH + '(*)', (req, res) => {
   Promise.all(promises)
     .then(() => {
       let context = {}
-      serverRender(path, store, context).then(html => {
+      serverRender(path, store, context, devAssets).then(html => {
         if (context.status === 404) {
           return res.status(404).send(html)
         }

@@ -3,11 +3,15 @@ const baseConfig = require('./webpack.base.config')
 const project = require('./project.config')
 const { assetUrl } = require('./env.config').default
 const path = require('path')
+const webpack = require('webpack')
 
 const config = {
   devtool: project.globals.__PROD__ ? false : 'source-map',
   entry: {
-    app: project.paths.client('renderer/client')
+    app: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=50000&reload=true',
+      project.paths.client('renderer/client')
+    ]
   },
   module: {
     rules: [
@@ -23,12 +27,17 @@ const config = {
     ]
   },
   output: {
+    hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
+    hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     filename: project.globals.__DEV__
       ? '[name].js'
       : `[name].[${project.compiler_hash_type}].js`,
     publicPath: assetUrl,
     path: project.paths.dist()
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {

@@ -35,27 +35,6 @@ let config = {
           }
         ]
       },
-      // {
-      //   test: /\.(css|scss)$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: {
-      //           minimize: true,
-      //           url: true
-      //         }
-      //       },
-      //       {
-      //         loader: 'sass-loader',
-      //         options: {
-      //           includePaths: [project.paths.client('styles')]
-      //         }
-      //       }
-      //     ]
-      //   })
-      // },
       {
         test: /\.woff(\?.*)?$/,
         loader:
@@ -109,18 +88,5 @@ let config = {
     new webpack.DefinePlugin(project.globals)
   ]
 }
-
-// if (!project.globals.__DEV__) {
-//   const addConfig = {
-//     plugins: [
-//       new UglifyJsPlugin({
-//         uglifyOptions: {
-//           compress: true
-//         }
-//       })
-//     ]
-//   }
-//   config = merge(config, addConfig)
-// }
 
 module.exports = config

@@ -18,9 +18,15 @@ let vendor =
 let app = ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('js'))
 let style =
   ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('css'))
-const reloadScript = __DEV__ ? "<script src='/reload/reload.js'></script>" : ''
+// const reloadScript = __DEV__ ? "<script src='/reload/reload.js'></script>" : ''
 
-export default (path, store, context) => {
+export default (path, store, context, devAssets) => {
+  if (__DEV__) {
+    vendor = devAssets.vendorJs
+    app = devAssets.appJs
+    style = devAssets.appCss
+  }
+
   const App = (
     <Provider store={store}>
       <StaticRouter location={path} context={context}>
@@ -53,7 +59,6 @@ export default (path, store, context) => {
         ${loadableState.getScriptTag()}
         <script src='${vendor}'></script>
         <script src='${app}'></script>
-        ${reloadScript}
       </body>
       </html>`
   })

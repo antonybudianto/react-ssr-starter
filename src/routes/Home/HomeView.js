@@ -4,7 +4,7 @@ import './Home.scss'
 
 class HomeView extends Component {
   render() {
-    return <div>Home</div>
+    return <div>hossme</div>
   }
 }
 
