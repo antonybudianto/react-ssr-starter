@@ -4,17 +4,15 @@
   "description": "react ssr template",
   "main": "index.js",
   "scripts": {
+    "start": "better-npm-run start",
     "clean": "rimraf dist",
-    "lint": "eslint bin config src",
+    "lint": "eslint config src",
     "test": "jest",
+    "deploy": "better-npm-run deploy",
     "dev:client": "better-npm-run dev:client",
     "dev:server": "better-npm-run dev:server",
     "build:client": "better-npm-run build:client",
     "build:server": "better-npm-run build:server",
-    "start": "better-npm-run start",
-    "compile:dev": "better-npm-run compile:dev",
-    "compile:staging": "better-npm-run compile:staging",
-    "compile:prod": "better-npm-run compile:prod",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:staging": "better-npm-run deploy:staging",
     "deploy:prod": "better-npm-run deploy:prod",
@@ -29,56 +27,23 @@
         "DEBUG": "app:*"
       }
     },
-    "compile:dev": {
-      "command": "node bin/compile",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "compile:staging": {
-      "command": "node bin/compile",
-      "env": {
-        "NODE_ENV": "staging",
-        "DEBUG": "app:*"
-      }
-    },
-    "compile:prod": {
-      "command": "node bin/compile",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
-      }
+    "deploy": {
+      "command": "npm run clean && npm-run-all build:*"
     },
     "deploy:dev": {
-      "command": "npm run clean && npm run compile:dev && npm run start:dev",
+      "command": "npm run deploy",
       "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy:staging-old": {
-      "command": "npm run clean && npm run compile:staging",
-      "env": {
-        "NODE_ENV": "staging",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy:prod-old": {
-      "command": "npm run clean && npm run compile:prod",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
+        "NODE_ENV": "development"
       }
     },
     "deploy:staging": {
-      "command": "npm run clean && npm-run-all build:*",
+      "command": "npm run deploy",
       "env": {
         "NODE_ENV": "staging"
       }
     },
     "deploy:prod": {
-      "command": "npm run clean && npm-run-all build:*",
+      "command": "npm run deploy",
       "env": {
         "NODE_ENV": "production"
       }
@@ -90,16 +55,10 @@
       "command": "webpack --config ./config/webpack.client.config.babel.js --progress"
     },
     "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --watch",
-      "env": {
-        "NODE_ENV": "development"
-      }
+      "command": "webpack --config ./config/webpack.server.config.babel.js --watch"
     },
     "dev:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --watch",
-      "env": {
-        "NODE_ENV": "development"
-      }
+      "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
     }
   },
   "author": "Antony",
