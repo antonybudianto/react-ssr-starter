@@ -18,7 +18,6 @@ let vendor =
 let app = ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('js'))
 let style =
   ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('css'))
-// const reloadScript = __DEV__ ? "<script src='/reload/reload.js'></script>" : ''
 
 export default (path, store, context, devAssets) => {
   if (__DEV__) {
