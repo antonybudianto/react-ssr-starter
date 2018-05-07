@@ -5458,6 +5458,15 @@ node-gyp@^3.3.1:
     tar "^2.0.0"
     which "1"
 
+node-hot-loader@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/node-hot-loader/-/node-hot-loader-1.8.2.tgz#80c115070ca8019ca5cd54e27c9da4211b74e30c"
+  dependencies:
+    babel-register "^6.26.0"
+    path-is-absolute "^1.0.1"
+    source-map-support "^0.5.4"
+    yargs "^11.0.0"
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
@@ -7384,7 +7393,7 @@ source-map-support@^0.4.15:
   dependencies:
     source-map "^0.5.6"
 
-source-map-support@^0.5.0:
+source-map-support@^0.5.0, source-map-support@^0.5.4:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.5.tgz#0d4af9e00493e855402e8ec36ebed2d266fceb90"
   dependencies:
@@ -8512,7 +8521,7 @@ yargs-parser@^9.0.2:
   dependencies:
     camelcase "^4.1.0"
 
-yargs@11.0.0:
+yargs@11.0.0, yargs@^11.0.0:
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
   dependencies:

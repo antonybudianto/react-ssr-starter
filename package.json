@@ -49,16 +49,19 @@
       }
     },
     "build:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --progress"
+      "command":
+        "webpack --config ./config/webpack.server.config.babel.js --progress"
     },
     "build:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --progress --hot"
+      "command":
+        "webpack --config ./config/webpack.client.config.babel.js --progress --hot"
     },
     "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --watch"
+      "command": "node-hot --config ./config/webpack.server.config.babel.js"
     },
     "dev:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
+      "command":
+        "webpack --config ./config/webpack.client.config.babel.js --watch"
     }
   },
   "author": "Antony",
@@ -138,6 +141,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "http-proxy-middleware": "^0.18.0",
     "jest": "^22.4.3",
+    "node-hot-loader": "^1.8.2",
     "prettier": "1.12.1",
     "start-server-webpack-plugin": "^2.2.5",
     "uglifyjs-webpack-plugin": "^1.2.5",
