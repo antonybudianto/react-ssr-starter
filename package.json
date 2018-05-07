@@ -55,7 +55,7 @@
       "command": "webpack --config ./config/webpack.client.config.babel.js --progress --hot"
     },
     "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js && node dist/bundle"
+      "command": "webpack --config ./config/webpack.server.config.babel.js --watch"
     },
     "dev:client": {
       "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
@@ -138,10 +138,8 @@
     "eslint-plugin-standard": "^3.1.0",
     "http-proxy-middleware": "^0.18.0",
     "jest": "^22.4.3",
-    "nodemon": "1.17.4",
-    "nodemon-webpack-plugin": "^4.0.2",
     "prettier": "1.12.1",
-    "reload": "^2.2.2",
+    "start-server-webpack-plugin": "^2.2.5",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.1",
