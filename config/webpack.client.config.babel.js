@@ -9,7 +9,7 @@ const config = {
   devtool: project.globals.__PROD__ ? false : 'source-map',
   entry: {
     app: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=50000&reload=true',
+      'webpack-hot-middleware/client?timeout=1000&reload=true',
       project.paths.client('renderer/client')
     ]
   },
@@ -27,8 +27,6 @@ const config = {
     ]
   },
   output: {
-    hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
-    hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     filename: project.globals.__DEV__
       ? '[name].js'
       : `[name].[${project.compiler_hash_type}].js`,

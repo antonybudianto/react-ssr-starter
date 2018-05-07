@@ -3,7 +3,6 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const project = require('./project.config')
 const { assetUrl } = require('./env.config').default
-const NodemonPlugin = require('nodemon-webpack-plugin')
 const path = require('path')
 
 let config = {
@@ -39,13 +38,7 @@ let config = {
 
 if (project.globals.__DEV__) {
   const addConfig = {
-    plugins: [
-      new NodemonPlugin({
-        ignore: ['*.js.map', '*.svg', '*.png', '*.css', '*.css.map'],
-        watch: project.paths.dist(),
-        script: project.paths.dist('bundle')
-      })
-    ]
+    plugins: []
   }
   config = merge(config, addConfig)
 }

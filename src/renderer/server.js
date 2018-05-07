@@ -2,6 +2,8 @@ import 'babel-polyfill'
 import express from 'express'
 import morgan from 'morgan'
 import proxy from 'http-proxy-middleware'
+// import chokidar from 'chokidar'
+import path from 'path'
 
 import serverRender from './serverRenderer'
 import createStore from '../store/createStore'
@@ -38,6 +40,13 @@ if (__DEV__) {
     publicPath: webpackConfig.output.publicPath
   }))
   app.use(require('webpack-hot-middleware')(compiler))
+  // const emitter = require('hotrun')({
+  //   extensions: ['.js'],
+  //   watch: path.resolve(__dirname, '../../src')
+  // })
+  // emitter.on('hot', () => {
+  //   console.log('HOT HOT S: module hot compiled done!')
+  // })
 }
 
 if (__DEV__) {

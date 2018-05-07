@@ -55,7 +55,7 @@
       "command": "webpack --config ./config/webpack.client.config.babel.js --progress --hot"
     },
     "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --watch"
+      "command": "webpack --config ./config/webpack.server.config.babel.js && node dist/bundle"
     },
     "dev:client": {
       "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
