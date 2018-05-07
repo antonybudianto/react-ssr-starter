@@ -41,11 +41,11 @@ if (__DEV__) {
   app.use(require('webpack-hot-middleware')(compiler))
 }
 
+app.use(HOME_PATH, express.static('dist'))
+
 if (__DEV__) {
   const backendUrl = process.env.BACKEND_URL || 'https://example.com'
   console.log('BACKEND_URL = ' + backendUrl)
-
-  app.use(HOME_PATH, express.static('dist'))
 
   app.use(
     ['/api'],
