@@ -2,8 +2,6 @@ import 'babel-polyfill'
 import express from 'express'
 import morgan from 'morgan'
 import proxy from 'http-proxy-middleware'
-// import chokidar from 'chokidar'
-import path from 'path'
 
 import serverRender from './serverRenderer'
 import createStore from '../store/createStore'
@@ -35,22 +33,17 @@ if (__DEV__) {
   var webpackConfig = require('../../config/webpack.client.config.babel')
   var compiler = webpack(webpackConfig)
 
-  app.use(require('webpack-dev-middleware')(compiler, {
-    serverSideRender: true,
-    publicPath: webpackConfig.output.publicPath
-  }))
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      serverSideRender: true,
+      publicPath: webpackConfig.output.publicPath
+    })
+  )
   app.use(require('webpack-hot-middleware')(compiler))
-  // const emitter = require('hotrun')({
-  //   extensions: ['.js'],
-  //   watch: path.resolve(__dirname, '../../src')
-  // })
-  // emitter.on('hot', () => {
-  //   console.log('HOT HOT S: module hot compiled done!')
-  // })
 }
 
 if (__DEV__) {
-  const backendUrl = process.env.BACKEND_URL
+  const backendUrl = process.env.BACKEND_URL || 'https://example.com'
   console.log('BACKEND_URL = ' + backendUrl)
 
   app.use(HOME_PATH, express.static('dist'))
@@ -68,18 +61,18 @@ if (__DEV__) {
 
 const port = project.serverPort
 
-// if (__DEV__) {
-//   console.log('reload is on')
-//   const reload = require('reload')
-//   reload(app)
-// }
-
 app.get(HOME_PATH + '(*)', (req, res) => {
   if (__DEV__) {
     const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName
-    devAssets.appJs = assetsByChunkName.app.find(f => /^app(\.[a-z0-9]+)?\.js$/.test(f))
-    devAssets.appCss = assetsByChunkName.app.find(f => /^app(\.[a-z0-9]+)?\.css$/.test(f))
-    devAssets.vendorJs = assetsByChunkName.vendor.find(f => /^vendor(\.[a-z0-9]+)?\.js$/.test(f))
+    devAssets.appJs = assetsByChunkName.app.find(f =>
+      /^app(\.[a-z0-9]+)?\.js$/.test(f)
+    )
+    devAssets.appCss = assetsByChunkName.app.find(f =>
+      /^app(\.[a-z0-9]+)?\.css$/.test(f)
+    )
+    devAssets.vendorJs = assetsByChunkName.vendor.find(f =>
+      /^vendor(\.[a-z0-9]+)?\.js$/.test(f)
+    )
   }
 
   const store = createStore()
