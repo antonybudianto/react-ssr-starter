@@ -143,7 +143,6 @@
     "jest": "^22.4.3",
     "node-hot-loader": "^1.8.2",
     "prettier": "1.12.1",
-    "start-server-webpack-plugin": "^2.2.5",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.1",
