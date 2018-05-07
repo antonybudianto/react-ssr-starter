@@ -48,7 +48,6 @@ export default (path, store, context, devAssets) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         ${helmet.meta.toString()}
         <link rel='stylesheet' href='${style}'>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
         <link rel="canonical" href="https://www.myreactapp.com/" >
         ${helmet.link.toString()}
       </head>
