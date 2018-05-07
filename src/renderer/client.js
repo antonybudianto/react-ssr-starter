@@ -9,18 +9,26 @@ import { loadComponents } from 'loadable-components'
 
 import { createClientStore } from '../store/createStore'
 import CoreLayout from '../layouts/CoreLayout'
+const store = createClientStore(window.INITIAL_STATE)
 
-loadComponents().then(() => {
+function render (MyApp) {
   hydrate(
-    <Provider store={createClientStore(window.INITIAL_STATE)}>
+    <Provider store={store}>
       <BrowserRouter>
-        <CoreLayout />
+        <MyApp />
       </BrowserRouter>
     </Provider>,
     document.querySelector('#root')
   )
+}
+
+loadComponents().then(() => {
+  render(CoreLayout)
 })
 
 if (module.hot) {
-  module.hot.accept()
+  module.hot.accept('../layouts/CoreLayout', () => {
+    const MyApp = require('../layouts/CoreLayout').default
+    render(MyApp)
+  })
 }
