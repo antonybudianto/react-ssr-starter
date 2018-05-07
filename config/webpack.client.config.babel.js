@@ -9,7 +9,9 @@ const config = {
   devtool: project.globals.__PROD__ ? false : 'source-map',
   entry: {
     app: [
-      'webpack-hot-middleware/client?timeout=1000&reload=true',
+      ...(project.globals.__DEV__ ? [
+        'webpack-hot-middleware/client?timeout=1000&reload=true'
+      ] : []),
       project.paths.client('renderer/client')
     ]
   },
@@ -29,13 +31,13 @@ const config = {
   output: {
     filename: project.globals.__DEV__
       ? '[name].js'
-      : `[name].[${project.compiler_hash_type}].js`,
+      : `[name].[hash].js`,
     publicPath: assetUrl,
     path: project.paths.dist()
   },
-  plugins: [
+  plugins: project.globals.__DEV__ ? [
     new webpack.HotModuleReplacementPlugin()
-  ],
+  ] : [],
   optimization: {
     splitChunks: {
       cacheGroups: {
