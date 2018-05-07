@@ -54,7 +54,7 @@
     },
     "build:client": {
       "command":
-        "webpack --config ./config/webpack.client.config.babel.js --progress --hot"
+        "webpack --config ./config/webpack.client.config.babel.js --progress"
     },
     "dev:server": {
       "command": "node-hot --config ./config/webpack.server.config.babel.js"
