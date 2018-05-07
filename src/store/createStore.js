@@ -10,7 +10,8 @@ export const createClientStore = initialState => {
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers/index').default
+      console.log('Root reducer updated')
+      const nextRootReducer = require('../reducers').default
       store.replaceReducer(nextRootReducer)
     })
   }
