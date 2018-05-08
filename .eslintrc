@@ -1,6 +1,10 @@
 {
   "parser": "babel-eslint",
-  "extends": ["plugin:react/recommended", "plugin:jest/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
+  ],
   "plugins": ["babel", "react", "jest"],
   "env": {
     "jest/globals": true,
@@ -10,7 +14,11 @@
     "__DEV__": false,
     "__STAG__": false,
     "__PROD__": false,
-    "jest": false
+    "jest": false,
+    "process": false,
+    "module": false,
+    "__dirname": false,
+    "Promise": false
   },
   "rules": {
     "space-before-function-paren": 0,
@@ -18,6 +26,7 @@
     "no-unused-vars": 2,
     "jsx-quotes": [2, "prefer-double"],
     "max-len": [2, 120, 2],
-    "object-curly-spacing": [2, "always"]
+    "object-curly-spacing": [2, "always"],
+    "no-console": 0
   }
 }
