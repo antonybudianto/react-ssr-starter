@@ -4,6 +4,7 @@ const baseConfig = require('./webpack.base.config')
 const project = require('./project.config')
 const { assetUrl } = require('./env.config').default
 const path = require('path')
+const StartServerPlugin = require('start-server-webpack-plugin')
 
 let config = {
   target: 'node',
@@ -38,7 +39,11 @@ let config = {
 
 if (project.globals.__DEV__) {
   const addConfig = {
-    plugins: []
+    plugins: [
+      new StartServerPlugin({
+        name: 'bundle.js'
+      })
+    ]
   }
   config = merge(config, addConfig)
 }
