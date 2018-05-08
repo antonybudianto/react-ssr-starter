@@ -49,20 +49,16 @@
       }
     },
     "build:server": {
-      "command":
-        "webpack --config ./config/webpack.server.config.babel.js --progress"
+      "command": "webpack --config ./config/webpack.server.config.babel.js --progress"
     },
     "build:client": {
-      "command":
-        "webpack --config ./config/webpack.client.config.babel.js --progress"
+      "command": "webpack --config ./config/webpack.client.config.babel.js --progress"
     },
     "dev:server": {
-      "command":
-        "webpack --config ./config/webpack.server.config.babel.js --hot --watch"
+      "command": "webpack --config ./config/webpack.server.config.babel.js --hot --watch"
     },
     "dev:client": {
-      "command":
-        "webpack --config ./config/webpack.client.config.babel.js --watch"
+      "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
     }
   },
   "author": "Antony",
@@ -133,7 +129,6 @@
     "eslint": "^4.19.1",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-jest": "^21.15.1",
-    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "http-proxy-middleware": "^0.18.0",
     "jest": "^22.4.3",
