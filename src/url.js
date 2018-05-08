@@ -1,4 +1,4 @@
-import { ASSET_URL_PROD, ASSET_URL_STAG } from './constant'
+import { ASSET_URL_PROD, ASSET_URL_STAG, ASSET_URL_DEV } from './constant'
 
 let assetUrl = ASSET_URL_PROD
 
