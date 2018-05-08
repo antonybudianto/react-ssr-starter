@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": [],
+  "extends": ["plugin:react/recommended"],
   "plugins": ["babel", "react", "promise", "jest"],
   "env": {
     "jest/globals": true,
@@ -15,6 +15,7 @@
   "rules": {
     "space-before-function-paren": 0,
     "key-spacing": 0,
+    "no-unused-vars": 2,
     "jsx-quotes": [2, "prefer-double"],
     "max-len": [2, 120, 2],
     "object-curly-spacing": [2, "always"]
