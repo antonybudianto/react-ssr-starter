@@ -11,7 +11,7 @@ import { createClientStore } from '../store/createStore'
 import CoreLayout from '../layouts/CoreLayout'
 const store = createClientStore(window.INITIAL_STATE)
 
-function render (MyApp) {
+function render(MyApp) {
   hydrate(
     <Provider store={store}>
       <BrowserRouter>
