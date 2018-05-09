@@ -58,8 +58,6 @@ if (__DEV__) {
   )
 }
 
-// const port = project.serverPorts
-
 app.get(HOME_PATH + '(*)', (req, res) => {
   if (__DEV__) {
     const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName
