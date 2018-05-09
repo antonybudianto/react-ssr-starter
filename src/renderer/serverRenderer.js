@@ -26,6 +26,8 @@ export default (path, store, context, devAssets) => {
     style = devAssets.appCss
   }
 
+  const styleTag = style ? `<link rel='stylesheet' href='${style}'>` : ''
+
   const App = (
     <Provider store={store}>
       <StaticRouter location={path} context={context}>
@@ -47,7 +49,7 @@ export default (path, store, context, devAssets) => {
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         ${helmet.meta.toString()}
-        <link rel='stylesheet' href='${style}'>
+        ${styleTag}
         <link rel="canonical" href="https://www.myreactapp.com/" >
         ${helmet.link.toString()}
       </head>

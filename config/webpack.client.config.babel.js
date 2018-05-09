@@ -32,7 +32,7 @@ const config = {
       {
         test: /\.s?[ac]ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
