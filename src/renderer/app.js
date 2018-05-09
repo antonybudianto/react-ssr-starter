@@ -98,4 +98,13 @@ app.get(HOME_PATH + '(*)', (req, res) => {
     })
 })
 
+if (module.hot) {
+  module.hot.accept('./serverRenderer', () => {
+    console.log('✅ Server reloaded 1')
+  })
+  module.hot.accept('../routes/index.js', () => {
+    console.log('✅ Server reloaded 2')
+  })
+}
+
 export default app

@@ -7375,9 +7375,9 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-start-server-webpack-plugin@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/start-server-webpack-plugin/-/start-server-webpack-plugin-2.2.5.tgz#4a2838759b0f36acd11b0b2f5f196f289ae29d31"
+start-server-webpack-plugin@^3.0.0-rc3:
+  version "3.0.0-rc3"
+  resolved "https://registry.yarnpkg.com/start-server-webpack-plugin/-/start-server-webpack-plugin-3.0.0-rc3.tgz#20fabee64114f3833a3a7241896967ae3de0d4d5"
 
 static-extend@^0.1.1:
   version "0.1.2"

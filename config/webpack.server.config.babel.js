@@ -41,7 +41,7 @@ if (project.globals.__DEV__) {
   const addConfig = {
     plugins: [
       new StartServerPlugin({
-        name: 'bundle.js'
+        entryName: 'bundle'
       })
     ]
   }
