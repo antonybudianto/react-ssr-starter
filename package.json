@@ -9,7 +9,6 @@
     "lint": "eslint config src",
     "test": "jest",
     "deploy": "better-npm-run deploy",
-    "dev:client": "better-npm-run dev:client",
     "dev:server": "better-npm-run dev:server",
     "build:client": "better-npm-run build:client",
     "build:server": "better-npm-run build:server",
@@ -21,11 +20,20 @@
   },
   "betterScripts": {
     "start": {
-      "command": "npm run clean && npm-run-all dev:server",
+      "command": "npm run clean && npm run dev:server",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
       }
+    },
+    "dev:server": {
+      "command": "webpack --config ./config/webpack.server.config.babel.js --hot --watch"
+    },
+    "build:server": {
+      "command": "webpack --config ./config/webpack.server.config.babel.js --progress"
+    },
+    "build:client": {
+      "command": "webpack --config ./config/webpack.client.config.babel.js --progress"
     },
     "deploy": {
       "command": "npm run clean && npm-run-all build:*"
@@ -47,18 +55,6 @@
       "env": {
         "NODE_ENV": "production"
       }
-    },
-    "build:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --progress"
-    },
-    "build:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --progress"
-    },
-    "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --hot --watch"
-    },
-    "dev:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --watch"
     }
   },
   "author": "Antony",
