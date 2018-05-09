@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import './Home.scss'
+import './HomeView.scss'
 
 class HomeView extends Component {
   render() {
-    return <div>home view</div>
+    return <div className="home-view">home view</div>
   }
 }
 

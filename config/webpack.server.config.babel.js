@@ -23,6 +23,10 @@ let config = {
           babelrc: false,
           extends: path.resolve(__dirname, '../.server.babelrc')
         }
+      },
+      {
+        test: /\.s?[ac]ss$/,
+        use: 'null-loader'
       }
     ]
   },
