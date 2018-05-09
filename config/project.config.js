@@ -17,37 +17,13 @@ const config = {
   dir_client: path.resolve(__dirname, '../src'),
   dir_dist: path.resolve(__dirname, '../dist'),
   dir_public: path.resolve(__dirname, '../public'),
-  dir_server: 'server',
-  dir_test: 'tests',
 
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  serverHost: ip.address(), // use string 'localhost' to prevent exposure on local network
-  serverPort: process.env.PORT || 3000,
-
-  // ----------------------------------
-  // Compiler Configuration
-  // ----------------------------------
-  compiler_babel: {
-    cacheDirectory: true
-  },
-  compiler_hash_type: 'chunkhash',
-  compiler_fail_on_warning: false,
-  compiler_quiet: false,
-  compiler_stats: {
-    chunks: true,
-    chunkModules: true,
-    colors: true
-  },
-
-  // ----------------------------------
-  // Test Configuration
-  // ----------------------------------
-  coverage_reporters: [
-    { type: 'text-summary' },
-    { type: 'lcov', dir: 'coverage' }
-  ]
+  // serverHost: ip.address(), // use string 'localhost' to prevent exposure on local network
+  serverHost: 'localhost',
+  serverPort: process.env.PORT || 3000
 }
 
 /************************************************
