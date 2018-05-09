@@ -100,10 +100,10 @@ app.get(HOME_PATH + '(*)', (req, res) => {
 
 if (module.hot) {
   module.hot.accept('./serverRenderer', () => {
-    console.log('✅ Server reloaded 1')
+    console.log('✅ Server hot reloaded ./serverRenderer')
   })
-  module.hot.accept('../routes/index.js', () => {
-    console.log('✅ Server reloaded 2')
+  module.hot.accept('../routes', () => {
+    console.log('✅ Server hot reloaded ../routes')
   })
 }
 
