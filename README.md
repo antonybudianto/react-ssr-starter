@@ -14,14 +14,14 @@
 ## How to use
 
 1. Start
-```
-npm start
-```
+   ```
+   npm start
+   ```
 
 2. Build
-```
-npm run deploy:prod
-```
+   ```
+   npm run deploy:prod
+   ```
 
 ## License
 MIT
