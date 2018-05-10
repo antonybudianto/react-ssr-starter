@@ -21,6 +21,6 @@ export const getInitialData = (req, store) => {
   })
 }
 
-export default () => {
+export default function initRenderRoutes() {
   return <div>{renderRoutes(routes)}</div>
 }

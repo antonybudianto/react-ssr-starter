@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const project = require('./project.config')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const devMode = process.env.NODE_ENV === 'development'
@@ -16,46 +15,6 @@ let config = {
   },
   module: {
     rules: [
-      {
-        test: /\.s?[ac]ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: true,
-              url: true
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [project.paths.client('styles')]
-            }
-          }
-        ]
-      },
-      // {
-      //   test: /\.(css|scss)$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: {
-      //           minimize: true,
-      //           url: true
-      //         }
-      //       },
-      //       {
-      //         loader: 'sass-loader',
-      //         options: {
-      //           includePaths: [project.paths.client('styles')]
-      //         }
-      //       }
-      //     ]
-      //   })
-      // },
       {
         test: /\.woff(\?.*)?$/,
         loader:
@@ -101,26 +60,7 @@ let config = {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-    }),
-    new webpack.DefinePlugin(project.globals)
-  ]
+  plugins: [new webpack.DefinePlugin(project.globals)]
 }
-
-// if (!project.globals.__DEV__) {
-//   const addConfig = {
-//     plugins: [
-//       new UglifyJsPlugin({
-//         uglifyOptions: {
-//           compress: true
-//         }
-//       })
-//     ]
-//   }
-//   config = merge(config, addConfig)
-// }
 
 module.exports = config

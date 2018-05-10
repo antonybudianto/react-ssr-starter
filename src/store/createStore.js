@@ -6,7 +6,17 @@ export const createClientStore = initialState => {
   const composeEnhancers = __DEV__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     : compose
-  return createDefaultStore(initialState, composeEnhancers)
+  const store = createDefaultStore(initialState, composeEnhancers)
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      console.log('Root reducer updated')
+      const nextRootReducer = require('../reducers').default
+      store.replaceReducer(nextRootReducer)
+    })
+  }
+
+  return store
 }
 
 const createDefaultStore = (initialState = {}, composeEnhancers = compose) => {

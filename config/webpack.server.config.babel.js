@@ -3,8 +3,8 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const project = require('./project.config')
 const { assetUrl } = require('./env.config').default
-const NodemonPlugin = require('nodemon-webpack-plugin')
 const path = require('path')
+const StartServerPlugin = require('start-server-webpack-plugin')
 
 let config = {
   target: 'node',
@@ -23,6 +23,10 @@ let config = {
           babelrc: false,
           extends: path.resolve(__dirname, '../.server.babelrc')
         }
+      },
+      {
+        test: /\.s?[ac]ss$/,
+        use: 'null-loader'
       }
     ]
   },
@@ -40,10 +44,8 @@ let config = {
 if (project.globals.__DEV__) {
   const addConfig = {
     plugins: [
-      new NodemonPlugin({
-        ignore: ['*.js.map', '*.svg', '*.png', '*.css', '*.css.map'],
-        watch: project.paths.dist(),
-        script: project.paths.dist('bundle')
+      new StartServerPlugin({
+        entryName: 'bundle'
       })
     ]
   }
