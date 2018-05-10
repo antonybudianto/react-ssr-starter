@@ -103,6 +103,9 @@ if (module.hot) {
   module.hot.accept('../routes', () => {
     console.log('✅ Server hot reloaded ../routes')
   })
+  module.hot.accept('../store/createStore', () => {
+    console.log('✅ Server hot reloaded ../store/createStore')
+  })
 }
 
 export default app
