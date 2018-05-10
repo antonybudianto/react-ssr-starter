@@ -5,6 +5,3 @@ node_js:
 script:
   - yarn lint
   - yarn deploy:prod
-after_script:
-  - yarn global add codecov
-  - codecov
