@@ -16,7 +16,7 @@ class HomeView extends Component {
     return (
       <div className="home-view">
         <div>
-          home antony (change HomeView.js and the count should not be reset)
+          home view (change HomeView.js and the count should not be reset)
         </div>
         <div>
           user: {this.props.user.isLoggedIn ? 'loggedIn' : 'notLoggedIn'}

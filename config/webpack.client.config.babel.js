@@ -52,7 +52,7 @@ const config = {
     ]
   },
   output: {
-    filename: project.globals.__DEV__ ? '[name].js' : `[name].[hash].js`,
+    filename: project.globals.__DEV__ ? '[name].js' : `[name].[chunkhash].js`,
     publicPath: assetUrl,
     path: project.paths.dist()
   },
