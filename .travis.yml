@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "10.1"
+  - "8.11"
+script:
+  - yarn lint
+  - yarn deploy:prod
+after_script:
+  - yarn global add codecov
+  - codecov
