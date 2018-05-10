@@ -5,6 +5,7 @@ const { assetUrl } = require('./env.config').default
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 const devMode = process.env.NODE_ENV === 'development'
 
@@ -58,7 +59,7 @@ const config = {
   plugins: [
     ...(project.globals.__DEV__
       ? [new webpack.HotModuleReplacementPlugin()]
-      : []),
+      : [new ManifestPlugin()]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'

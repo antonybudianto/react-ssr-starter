@@ -1,6 +1,5 @@
 import React from 'react'
 import serialize from 'serialize-javascript'
-import fs from 'fs-extra'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
@@ -8,16 +7,17 @@ import { getLoadableState } from 'loadable-components/server'
 import { Helmet } from 'react-helmet'
 
 import CoreLayout from '../layouts/CoreLayout'
-import { ASSET_URL } from '../url'
 
-let files = fs
-  .readdirSync(__dirname)
-  .filter(file => file.endsWith('js') || file.endsWith('css'))
-let vendor =
-  ASSET_URL + files.find(f => f.startsWith('vendor') && f.endsWith('js'))
-let app = ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('js'))
-let style =
-  ASSET_URL + files.find(f => f.startsWith('app') && f.endsWith('css'))
+let vendor
+let app
+let style
+
+if (!__DEV__) {
+  const manifest = require('../../dist/manifest.json')
+  vendor = manifest['vendor.js']
+  app = manifest['app.js']
+  style = manifest['app.css']
+}
 
 export default (path, store, context, devAssets) => {
   if (__DEV__) {
