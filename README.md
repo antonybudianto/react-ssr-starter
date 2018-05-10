@@ -1,5 +1,7 @@
 # react-ssr-starter
 
+[![Build Status](https://travis-ci.com/antonybudianto/react-ssr-starter.svg?branch=master)](https://travis-ci.com/antonybudianto/react-ssr-starter)
+
 > Personal and opinionated React Fullstack starter.
 
 ## Features:
