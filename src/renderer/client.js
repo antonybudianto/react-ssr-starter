@@ -26,9 +26,9 @@ loadComponents().then(() => {
   render(CoreLayout)
 })
 
-if (module.hot) {
-  module.hot.accept('../layouts/CoreLayout', () => {
-    const MyApp = require('../layouts/CoreLayout').default
-    render(MyApp)
-  })
-}
+// if (module.hot) {
+//   module.hot.accept('../layouts/CoreLayout', () => {
+//     const MyApp = require('../layouts/CoreLayout').default
+//     render(MyApp)
+//   })
+// }
