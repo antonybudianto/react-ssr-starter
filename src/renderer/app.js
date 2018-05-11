@@ -44,8 +44,8 @@ if (__DEV__) {
 app.use(HOME_PATH, express.static('dist'))
 
 if (__DEV__) {
-  const backendUrl = process.env.BACKEND_URL || 'https://example.com'
-  console.log('BACKEND_URL = ' + backendUrl)
+  const backendUrl = process.env.APP_BACKEND_URL || 'https://example.com'
+  console.log('APP_BACKEND_URL = ' + backendUrl)
 
   app.use(
     ['/api'],
