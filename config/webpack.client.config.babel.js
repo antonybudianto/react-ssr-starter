@@ -6,6 +6,8 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 const devMode = process.env.NODE_ENV === 'development'
 
@@ -59,7 +61,13 @@ const config = {
   plugins: [
     ...(project.globals.__DEV__
       ? [new webpack.HotModuleReplacementPlugin()]
-      : [new ManifestPlugin()]),
+      : [
+          new ManifestPlugin(),
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false
+          })
+        ]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
