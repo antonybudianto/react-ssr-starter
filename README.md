@@ -1,5 +1,7 @@
 # react-ssr-starter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/antonybudianto/react-ssr-starter.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.com/antonybudianto/react-ssr-starter.svg?branch=master)](https://travis-ci.com/antonybudianto/react-ssr-starter)
 
 > Personal and opinionated React Fullstack starter.
