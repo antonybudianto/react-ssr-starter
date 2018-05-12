@@ -25,5 +25,9 @@
    npm run deploy:prod
    ```
 
+## Alternatives
+- Do you use [create-react-app](https://github.com/facebook/create-react-app)?
+  - Try on [CRA Universal](https://github.com/antonybudianto/cra-universal) for SSR, without eject!
+
 ## License
 MIT
