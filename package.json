@@ -85,7 +85,7 @@
     "dotenv": "5.0.1",
     "express": "4.16.3",
     "file-loader": "^1.1.11",
-    "loadable-components": "2.0.1",
+    "loadable-components": "2.1.0",
     "lodash": "4.17.10",
     "lodash-es": "4.17.10",
     "mini-css-extract-plugin": "0.4.0",
