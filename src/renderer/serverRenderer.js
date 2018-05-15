@@ -7,6 +7,7 @@ import { getLoadableState } from 'loadable-components/server'
 import { Helmet } from 'react-helmet'
 
 import CoreLayout from '../layouts/CoreLayout'
+import { ASSET_URL } from '../url';
 
 let vendor
 let app
@@ -21,9 +22,9 @@ if (!__DEV__) {
 
 export default (path, store, context, devAssets) => {
   if (__DEV__) {
-    vendor = devAssets.vendorJs
-    app = devAssets.appJs
-    style = devAssets.appCss
+    vendor = ASSET_URL + devAssets.vendorJs
+    app = ASSET_URL + devAssets.appJs
+    style = devAssets.appCss ? (ASSET_URL + devAssets.appCss) : null
   }
 
   const styleTag = style ? `<link rel='stylesheet' href='${style}'>` : ''
