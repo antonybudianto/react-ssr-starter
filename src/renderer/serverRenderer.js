@@ -57,7 +57,7 @@ export default (path, store, context, devAssets) => {
       <body>
         <div id='root'>${content}</div>
         <script>window.INITIAL_STATE=${serialize(store.getState())}</script>
-        ${loadableState.getScriptTag()}
+        ${loadableState.getScriptTag().replace(/-[0-9]"/, '"')}
         <script src='${vendor}'></script>
         <script src='${app}'></script>
       </body>
