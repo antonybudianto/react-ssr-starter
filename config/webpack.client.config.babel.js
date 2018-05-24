@@ -45,9 +45,7 @@ const config = {
           },
           {
             loader: 'sass-loader',
-            options: {
-              includePaths: [project.paths.client('styles')]
-            }
+            options: {}
           }
         ]
       }
@@ -77,12 +75,6 @@ const config = {
     splitChunks: {
       cacheGroups: {
         default: false,
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        },
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
