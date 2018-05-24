@@ -14,12 +14,6 @@
   "plugins": [
     "babel-plugin-dynamic-import-node",
     "transform-class-properties",
-    "loadable-components/babel",
-    [
-      "babel-plugin-transform-require-ignore",
-      {
-        "extensions": [".css"]
-      }
-    ]
+    "loadable-components/babel"
   ]
 }
