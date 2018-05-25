@@ -111,7 +111,7 @@
     "style-loader": "^0.21.0",
     "ua-parser-js": "0.7.18",
     "url-loader": "^1.0.1",
-    "webpack": "4.8.3",
+    "webpack": "4.9.0",
     "webpack-cli": "^2.1.4",
     "webpack-merge": "4.1.2"
   },
