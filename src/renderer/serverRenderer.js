@@ -11,14 +11,14 @@ import { ASSET_URL } from '../url';
 
 let vendor
 let app
-let style
+let appStyle
 let vendorStyle
 
 if (!__DEV__) {
   const manifest = require('../../dist/manifest.json')
   vendor = manifest['vendor.js']
   app = manifest['app.js']
-  style = manifest['app.css']
+  appStyle = manifest['app.css']
   vendorStyle = manifest['vendor.css']
 }
 
@@ -26,11 +26,11 @@ export default (path, store, context, devAssets) => {
   if (__DEV__) {
     vendor = ASSET_URL + devAssets.vendorJs
     app = ASSET_URL + devAssets.appJs
-    style = devAssets.appCss ? (ASSET_URL + devAssets.appCss) : null
+    appStyle = devAssets.appCss ? (ASSET_URL + devAssets.appCss) : null
     vendorStyle = devAssets.vendorCss ? (ASSET_URL + devAssets.vendorCss) : null
   }
 
-  const styleTag = style ? `<link rel='stylesheet' href='${style}'>` : ''
+  const appStyleTag = appStyle ? `<link rel='stylesheet' href='${appStyle}'>` : ''
   const vendorStyleTag = vendorStyle ? `<link rel='stylesheet' href='${vendorStyle}'>` : ''
 
   const App = (
@@ -55,7 +55,7 @@ export default (path, store, context, devAssets) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         ${helmet.meta.toString()}
         ${vendorStyleTag}
-        ${styleTag}
+        ${appStyleTag}
         <link rel="canonical" href="https://www.myreactapp.com/" >
         ${helmet.link.toString()}
       </head>
