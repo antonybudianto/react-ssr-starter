@@ -1,8 +1,7 @@
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
-const debug = require('debug')('app:config:project')
 
-debug('Creating default configuration.')
+console.log('Creating default configuration.')
 // ========================================================
 // Default Configuration
 // ========================================================
@@ -63,6 +62,6 @@ config.paths = {
 // ========================================================
 // Environment Configuration
 // ========================================================
-debug(`Environment NODE_ENV "${config.env}".`)
+console.log(`Environment NODE_ENV "${config.env}".`)
 
 module.exports = config
