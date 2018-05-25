@@ -70,6 +70,9 @@ app.get(HOME_PATH + '(*)', (req, res) => {
     devAssets.vendorJs = assetsByChunkName.vendor.find(f =>
       /^vendor(\.[a-z0-9]+)?\.js$/.test(f)
     )
+    devAssets.vendorCss = assetsByChunkName.vendor.find(f =>
+      /^vendor(\.[a-z0-9]+)?\.css$/.test(f)
+    )
   }
 
   const store = createStore()
