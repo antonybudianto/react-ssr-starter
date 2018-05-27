@@ -9,10 +9,10 @@ import { getInitialData } from '../routes'
 import { HOME_PATH } from '../url'
 
 const app = express()
-const loggerEnv = process.env.NODE_ENV === 'development' ? 'dev' : 'combined'
+const loggerEnv = __DEV__ ? 'dev' : 'combined'
 const logger = morgan(loggerEnv, {
   skip: function(req, res) {
-    if (process.env.NODE_ENV === 'development') {
+    if (__DEV__) {
       return false
     }
     return res.statusCode < 400
