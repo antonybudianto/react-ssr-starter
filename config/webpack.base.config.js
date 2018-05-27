@@ -3,8 +3,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const project = require('./project.config')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const devMode = process.env.NODE_ENV === 'development'
-console.log('mode', devMode ? 'development' : 'production')
+const devMode = project.globals.__DEV__
 let config = {
   mode: devMode ? 'development' : 'production',
   stats: {
@@ -62,5 +61,7 @@ let config = {
   },
   plugins: [new webpack.DefinePlugin(project.globals)]
 }
+
+console.log('webpack mode: ', config.mode)
 
 module.exports = config

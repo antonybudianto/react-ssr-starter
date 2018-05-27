@@ -9,7 +9,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
-const devMode = process.env.NODE_ENV === 'development'
+const devMode = project.globals.__DEV__
 
 const config = {
   devtool: project.globals.__PROD__ ? false : 'source-map',
