@@ -112,7 +112,7 @@
     "ua-parser-js": "0.7.18",
     "url-loader": "^1.0.1",
     "webpack": "4.9.1",
-    "webpack-cli": "^2.1.4",
+    "webpack-cli": "^3.0.0",
     "webpack-merge": "4.1.2"
   },
   "devDependencies": {
