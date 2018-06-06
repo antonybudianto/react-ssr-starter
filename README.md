@@ -9,7 +9,7 @@
 
 - SSR (Server side rendering)
 - Code-splitting
-- HMR (Hot module reload)
+- HMR (Hot module reload, **both** client and server)
 - Webpack 4, ESLint, Jest, Prettier
 
 ## How to use
