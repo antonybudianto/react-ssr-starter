@@ -7,7 +7,7 @@ import { getLoadableState } from 'loadable-components/server'
 import { Helmet } from 'react-helmet'
 
 import CoreLayout from '../layouts/CoreLayout'
-import { ASSET_URL } from '../url';
+import { ASSET_URL } from '../url'
 
 let vendor
 let app
@@ -26,12 +26,16 @@ export default (path, store, context, devAssets) => {
   if (__DEV__) {
     vendor = ASSET_URL + devAssets.vendorJs
     app = ASSET_URL + devAssets.appJs
-    appStyle = devAssets.appCss ? (ASSET_URL + devAssets.appCss) : null
-    vendorStyle = devAssets.vendorCss ? (ASSET_URL + devAssets.vendorCss) : null
+    appStyle = devAssets.appCss ? ASSET_URL + devAssets.appCss : null
+    vendorStyle = devAssets.vendorCss ? ASSET_URL + devAssets.vendorCss : null
   }
 
-  const appStyleTag = appStyle ? `<link rel='stylesheet' href='${appStyle}'>` : ''
-  const vendorStyleTag = vendorStyle ? `<link rel='stylesheet' href='${vendorStyle}'>` : ''
+  const appStyleTag = appStyle
+    ? `<link rel='stylesheet' href='${appStyle}'>`
+    : ''
+  const vendorStyleTag = vendorStyle
+    ? `<link rel='stylesheet' href='${vendorStyle}'>`
+    : ''
 
   const App = (
     <Provider store={store}>

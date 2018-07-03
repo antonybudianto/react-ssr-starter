@@ -38,4 +38,7 @@ const mapDispatchToProps = {
   toggleLogin
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeView)
