@@ -8,10 +8,6 @@
     "clean": "rimraf dist",
     "lint": "eslint config src",
     "test": "jest",
-    "deploy": "better-npm-run deploy",
-    "dev:server": "better-npm-run dev:server",
-    "build:client": "better-npm-run build:client",
-    "build:server": "better-npm-run build:server",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:staging": "better-npm-run deploy:staging",
     "deploy:prod": "better-npm-run deploy:prod",
@@ -25,32 +21,20 @@
         "NODE_ENV": "development"
       }
     },
-    "dev:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --hot --watch"
-    },
-    "build:server": {
-      "command": "webpack --config ./config/webpack.server.config.babel.js --progress"
-    },
-    "build:client": {
-      "command": "webpack --config ./config/webpack.client.config.babel.js --progress"
-    },
-    "deploy": {
-      "command": "npm run clean && npm-run-all build:*"
-    },
     "deploy:dev": {
-      "command": "npm run deploy",
+      "command": "react-kits build",
       "env": {
         "NODE_ENV": "development"
       }
     },
     "deploy:staging": {
-      "command": "npm run deploy",
+      "command": "react-kits build",
       "env": {
         "NODE_ENV": "staging"
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy",
+      "command": "react-kits build",
       "env": {
         "NODE_ENV": "production"
       }
