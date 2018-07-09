@@ -24,19 +24,22 @@
     "deploy:dev": {
       "command": "react-kits build",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "APP_ENV": "development"
       }
     },
     "deploy:staging": {
       "command": "react-kits build",
       "env": {
-        "NODE_ENV": "staging"
+        "NODE_ENV": "production",
+        "APP_ENV": "staging"
       }
     },
     "deploy:prod": {
       "command": "react-kits build",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "APP_ENV": "production"
       }
     }
   },
