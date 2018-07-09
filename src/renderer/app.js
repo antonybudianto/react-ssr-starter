@@ -28,17 +28,8 @@ let devAssets = {
 }
 
 if (__DEV__) {
-  var webpack = require('webpack')
-  var webpackConfig = require('../../config/webpack.client.config.babel')
-  var compiler = webpack(webpackConfig)
-
-  app.use(
-    require('webpack-dev-middleware')(compiler, {
-      serverSideRender: true,
-      publicPath: webpackConfig.output.publicPath
-    })
-  )
-  app.use(require('webpack-hot-middleware')(compiler))
+  const { devMiddleware } = require('react-kits/lib/express-dev')
+  devMiddleware(app)
 }
 
 app.use(HOME_PATH, express.static('dist'))
