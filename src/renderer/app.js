@@ -34,12 +34,6 @@ const app = createReactServer({
   onRender: () => <CoreLayout />
 })
 
-console.log(`
-======================
-This is custom server
-======================
-`)
-
 if (module.hot) {
   module.hot.accept('../routes', () => {
     console.log('✅ Server hot reloaded ../routes')

@@ -5973,9 +5973,9 @@ react-hot-loader@^4.3.3:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.0.2"
 
-react-kits-server@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/react-kits-server/-/react-kits-server-0.0.6.tgz#a3ad96c035613e32be45b99b710aca9604cb537c"
+react-kits-server@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/react-kits-server/-/react-kits-server-0.0.7.tgz#aae11ed99d8044421ef3aad8c2500f2627c9ab1e"
   dependencies:
     express "^4.16.3"
     loadable-components "^2.2.2"
