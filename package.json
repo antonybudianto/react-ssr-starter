@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "better-npm-run start",
-    "clean": "rimraf dist",
+    "clean": "react-kits clean",
     "lint": "eslint config src",
     "test": "jest",
     "deploy:dev": "better-npm-run deploy:dev",
