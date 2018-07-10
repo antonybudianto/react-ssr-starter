@@ -1,7 +1,9 @@
 import app from './app'
-import { serverPort, serverHost } from '../../config/project.config'
 
-const httpServer = app.listen(serverPort, serverHost, error => {
+const PORT = process.env.PORT || 3000
+const HOST = 'localhost'
+
+const httpServer = app.listen(PORT, HOST, error => {
   if (error) {
     console.error(error)
   } else {
