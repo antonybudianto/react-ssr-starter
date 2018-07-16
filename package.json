@@ -82,6 +82,7 @@
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "file-loader": "^1.1.11",
+    "formik": "^1.0.1",
     "loadable-components": "2.2.2",
     "lodash": "4.17.10",
     "lodash-es": "4.17.10",
@@ -111,6 +112,7 @@
     "style-loader": "^0.21.0",
     "ua-parser-js": "0.7.18",
     "url-loader": "^1.0.1",
+    "validator": "^10.4.0",
     "webpack": "4.15.1",
     "webpack-cli": "^3.0.2",
     "webpack-merge": "4.1.3"
