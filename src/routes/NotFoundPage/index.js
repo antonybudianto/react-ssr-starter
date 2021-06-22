@@ -1,9 +1,6 @@
 // import NotFoundPage from './NotFoundPage'
-import loadable from 'loadable-components'
+import loadable from "@loadable/component"
 
-const NotFoundPage = loadable(() => import('./NotFoundPage'))
+const NotFoundPage = loadable(() => import("./NotFoundPage"))
 
-export default {
-  path: '**',
-  component: NotFoundPage
-}
+export default NotFoundPage

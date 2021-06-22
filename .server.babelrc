@@ -1,19 +1,19 @@
 {
   "presets": [
     [
-      "env", {
+      "@babel/preset-env",
+      {
         "modules": false,
         "targets": {
           "browsers": ["last 2 versions"]
         }
       }
     ],
-    "react",
-    "stage-0"
+    "@babel/preset-react"
   ],
   "plugins": [
-    "babel-plugin-dynamic-import-node",
-    "transform-class-properties",
-    "loadable-components/babel"
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@loadable/babel-plugin"
   ]
 }

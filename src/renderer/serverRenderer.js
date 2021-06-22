@@ -1,13 +1,14 @@
-import React from 'react'
-import serialize from 'serialize-javascript'
-import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
-import { StaticRouter } from 'react-router-dom'
-import { getLoadableState } from 'loadable-components/server'
-import { Helmet } from 'react-helmet'
+import React from "react"
+import { renderToString } from "react-dom/server"
+import { StaticRouter } from "react-router-dom"
+import path from "path"
+// import { getLoadableState } from 'loadable-components/server'
+import { ChunkExtractor } from "@loadable/server"
 
-import CoreLayout from '../layouts/CoreLayout'
-import { ASSET_URL } from '../url'
+import { HelmetProvider } from "react-helmet-async"
+
+import CoreLayout from "../layouts/CoreLayout"
+import { ASSET_URL } from "../url"
 
 let vendor
 let app
@@ -15,14 +16,14 @@ let appStyle
 let vendorStyle
 
 if (!__DEV__) {
-  const manifest = require('../../dist/manifest.json')
-  vendor = manifest['vendor.js']
-  app = manifest['app.js']
-  appStyle = manifest['app.css']
-  vendorStyle = manifest['vendor.css']
+  const manifest = require("../../dist/manifest.json")
+  vendor = manifest["vendor.js"]
+  app = manifest["app.js"]
+  appStyle = manifest["app.css"]
+  vendorStyle = manifest["vendor.css"]
 }
 
-export default (path, store, context, devAssets) => {
+export default async (locPath, store, context, devAssets) => {
   if (__DEV__) {
     vendor = ASSET_URL + devAssets.vendorJs
     app = ASSET_URL + devAssets.appJs
@@ -30,27 +31,35 @@ export default (path, store, context, devAssets) => {
     vendorStyle = devAssets.vendorCss ? ASSET_URL + devAssets.vendorCss : null
   }
 
+  const helmetCtx = {}
+
+  const statsFile = path.resolve(
+    __dirname,
+    path.resolve("./dist/loadable-stats.json")
+  )
+  const extractor = new ChunkExtractor({ statsFile, entrypoints: ["app"] })
+
   const appStyleTag = appStyle
     ? `<link rel='stylesheet' href='${appStyle}'>`
-    : ''
+    : ""
   const vendorStyleTag = vendorStyle
     ? `<link rel='stylesheet' href='${vendorStyle}'>`
-    : ''
+    : ""
 
   const App = (
-    <Provider store={store}>
-      <StaticRouter location={path} context={context}>
+    <StaticRouter location={locPath} context={context}>
+      <HelmetProvider context={helmetCtx}>
         <CoreLayout />
-      </StaticRouter>
-    </Provider>
+      </HelmetProvider>
+    </StaticRouter>
   )
 
-  return getLoadableState(App).then(loadableState => {
-    const content = renderToString(App)
+  const jsx = extractor.collectChunks(App)
+  const content = renderToString(jsx)
 
-    const helmet = Helmet.renderStatic()
+  const helmet = helmetCtx.helmet
 
-    return `<!doctype html>
+  return `<!doctype html>
       <html>
       <head>
         ${helmet.title.toString()}
@@ -65,11 +74,7 @@ export default (path, store, context, devAssets) => {
       </head>
       <body>
         <div id='root'>${content}</div>
-        <script>window.INITIAL_STATE=${serialize(store.getState())}</script>
-        ${loadableState.getScriptTag()}
-        <script src='${vendor}'></script>
-        <script src='${app}'></script>
+        ${extractor.getScriptTags()}
       </body>
       </html>`
-  })
 }

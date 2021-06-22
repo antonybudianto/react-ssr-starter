@@ -1,8 +1,8 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
+import React from "react"
+import { Helmet } from "react-helmet-async"
 
-import RouterStatus from '../../components/RouterStatus'
-import './NotFoundPage.scss'
+import RouterStatus from "../../components/RouterStatus"
+import "./NotFoundPage.css"
 
 const NotFoundPage = () => (
   <RouterStatus code={404}>

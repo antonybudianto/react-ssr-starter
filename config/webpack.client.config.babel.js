@@ -1,24 +1,28 @@
-const merge = require('webpack-merge')
-const baseConfig = require('./webpack.base.config')
-const project = require('./project.config')
-const { assetUrl } = require('./env.config').default
-const path = require('path')
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+const merge = require("webpack-merge")
+const baseConfig = require("./webpack.base.config")
+const project = require("./project.config")
+const { assetUrl } = require("./env.config").default
+const path = require("path")
+const webpack = require("webpack")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const ManifestPlugin = require("webpack-manifest-plugin")
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin
+const LoadablePlugin = require("@loadable/webpack-plugin")
 
 const devMode = project.globals.__DEV__
 
 const config = {
-  devtool: project.globals.__PROD__ ? false : 'source-map',
+  devtool: project.globals.__PROD__ ? false : "source-map",
   entry: {
     app: [
       ...(project.globals.__DEV__
-        ? ['webpack-hot-middleware/client?timeout=1000&reload=true']
+        ? [
+            "react-hot-loader/patch",
+            "webpack-hot-middleware/client?timeout=1000&reload=true"
+          ]
         : []),
-      project.paths.client('renderer/client')
+      project.paths.client("renderer/client")
     ]
   },
   module: {
@@ -26,33 +30,29 @@ const config = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
           babelrc: false,
-          extends: path.resolve(__dirname, '../.client.babelrc')
+          extends: path.resolve(__dirname, "../.client.babelrc")
         }
       },
       {
-        test: /\.s?[ac]ss$/,
+        test: /\.css$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               minimize: true,
               url: true
             }
-          },
-          {
-            loader: 'sass-loader',
-            options: {}
           }
         ]
       }
     ]
   },
   output: {
-    filename: project.globals.__DEV__ ? '[name].js' : `[name].[chunkhash].js`,
+    filename: project.globals.__DEV__ ? "[name].js" : `[name].[chunkhash].js`,
     publicPath: assetUrl,
     path: project.paths.dist()
   },
@@ -62,13 +62,16 @@ const config = {
       : [
           new ManifestPlugin(),
           new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
+            analyzerMode: "static",
             openAnalyzer: false
           })
         ]),
+    new LoadablePlugin({
+      writeToDisk: true
+    }),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+      filename: devMode ? "[name].css" : "[name].[hash].css",
+      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
     })
   ],
   optimization: {
@@ -77,8 +80,8 @@ const config = {
         default: false,
         commons: {
           test: /[\\/]node_modules[\\/].+\.js$/,
-          name: 'vendor',
-          chunks: 'all'
+          name: "vendor",
+          chunks: "all"
         }
       }
     }
