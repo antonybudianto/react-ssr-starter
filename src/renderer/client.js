@@ -1,13 +1,14 @@
 import "raf/polyfill"
 import React from "react"
-import { hydrate } from "react-dom"
+import { createRoot } from "react-dom"
 import { loadableReady } from "@loadable/component"
 
 import Root from "./root"
 import "basscss/css/basscss.css"
 
 function render(MyApp) {
-  hydrate(<MyApp />, document.querySelector("#root"))
+  const root = createRoot(document.querySelector("#root"))
+  root.render(<MyApp />)
 }
 
 loadableReady(() => {

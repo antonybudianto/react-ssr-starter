@@ -82,14 +82,14 @@ app.get(HOME_PATH + "(*)", (req, res) => {
   Promise.all(promises)
     .then(() => {
       let context = {}
-      serverRender(path, {}, context, devAssets).then(html => {
-        if (context.status === 404) {
-          return res.status(404).send(html)
-        }
-        if (context.url) {
-          return res.redirect(302, context.url)
-        }
-        res.send(html)
+      serverRender(path, {}, context, devAssets, res).then(html => {
+        // if (context.status === 404) {
+        //   return res.status(404).send(html)
+        // }
+        // if (context.url) {
+        //   return res.redirect(302, context.url)
+        // }
+        // res.send(html)
       })
     })
     .catch(err => {
