@@ -1,4 +1,4 @@
-import CoreLayout from './CoreLayout'
-import { hot } from 'react-hot-loader'
+import CoreLayout from "./CoreLayout"
+import { hot } from "react-hot-loader/root"
 
-export default hot(module)(CoreLayout)
+export default hot(CoreLayout)

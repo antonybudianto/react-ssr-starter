@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Helmet } from 'react-helmet'
+import React, { Component } from "react"
+import { Helmet } from "react-helmet-async"
 
-import renderRoutes from '../../routes'
+import renderRoutes from "../../routes"
 
-import './CoreLayout.scss'
+import "./CoreLayout.css"
 
 class CoreLayout extends Component {
   render() {
