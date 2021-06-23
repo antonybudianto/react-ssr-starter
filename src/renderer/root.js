@@ -5,7 +5,6 @@ import { HelmetProvider } from "react-helmet-async"
 import CoreLayout from "../layouts/CoreLayout"
 
 const Root = () => {
-  console.log("root2")
   return (
     <BrowserRouter>
       <HelmetProvider>
