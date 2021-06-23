@@ -55,6 +55,7 @@ export default async (locPath, store, context, devAssets, res) => {
       </div>
       </body>
       </html>`)
+      res.end()
     },
     onError(x) {
       // didError = true
