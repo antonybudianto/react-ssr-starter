@@ -34,7 +34,7 @@ export default async (locPath, store, context, devAssets, res) => {
     onReadyToStream() {
       // If something errored before we started streaming, we set the error code appropriately.
       res.statusCode = 200
-      // res.setHeader("Content-type", "text/html")
+      res.setHeader("Content-type", "text/html")
 
       res.write(`<!DOCTYPE html>
       <html>
@@ -49,16 +49,14 @@ export default async (locPath, store, context, devAssets, res) => {
       <div id="root">
       `)
       startWriting()
-    },
-    onCompleteAll() {
       res.write(`${extractor.getScriptTags()}
       </div>
       </body>
       </html>`)
-      res.end()
     },
+    // onCompleteAll() {
+    // },
     onError(x) {
-      // didError = true
       console.error(x)
     }
   })
