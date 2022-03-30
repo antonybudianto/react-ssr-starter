@@ -1,5 +1,5 @@
-import loadable from "@loadable/component"
+import { lazy } from "react"
 
-const NotFoundPage = loadable(() => import("./NotFoundPage"))
+const NotFoundPage = lazy(() => import("./NotFoundPage"))
 
 export default NotFoundPage

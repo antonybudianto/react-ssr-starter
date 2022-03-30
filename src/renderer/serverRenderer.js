@@ -1,24 +1,31 @@
 import React from "react"
+import fs from "fs"
 import { renderToPipeableStream } from "react-dom/server"
 
 import { StaticRouter } from "react-router-dom"
 import path from "path"
-import { ChunkExtractor } from "@loadable/server"
 
 import { HelmetProvider } from "react-helmet-async"
 
 import CoreLayout from "../layouts/CoreLayout"
+
+const isProd = process.env.NODE_ENV === "production"
 
 export default async (locPath, store, context, devAssets, res) => {
   const helmetCtx = {}
 
   const statsFile = path.resolve(
     __dirname,
-    path.resolve("./dist/loadable-stats.json")
+    path.resolve("./dist/manifest.json")
   )
-  const extractor = new ChunkExtractor({ statsFile, entrypoints: ["app"] })
+  const stats = JSON.parse(fs.readFileSync(statsFile, { encoding: "utf-8" }))
+  const styleTag = `<link href="${stats["app.css"]}" rel="stylesheet" />`
+  const scriptTags = `<script src="${
+    stats["vendor.js"]
+  }" type="text/javascript"></script>
+  <script src="${stats["app.js"]}" type="text/javascript"></script>`
 
-  const App = (
+  const app = (
     <StaticRouter location={locPath} context={context}>
       <HelmetProvider context={helmetCtx}>
         <CoreLayout />
@@ -30,14 +37,13 @@ export default async (locPath, store, context, devAssets, res) => {
   <meta name="robots" content="noindex,nofollow" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-  ${extractor.getStyleTags()}
+  ${isProd ? styleTag : ""}
   <link rel="canonical" href="https://www.myreactapp.com/" >
 </head>`
 
-  const jsx = extractor.collectChunks(App)
   let error
 
-  const { pipe } = renderToPipeableStream(jsx, {
+  const { pipe } = renderToPipeableStream(app, {
     onCompleteShell() {
       console.log("--complete-shell")
     },
@@ -52,7 +58,7 @@ export default async (locPath, store, context, devAssets, res) => {
         <html>
         ${HEAD_SECTION}
         <body><div id="root"></div>
-        <script>window.__ssrError=true;</script>${extractor.getScriptTags()}</body>
+        <script>window.__ssrError=true;</script>${scriptTags}</body>
         </html>`)
         return
       }
@@ -66,7 +72,7 @@ export default async (locPath, store, context, devAssets, res) => {
       pipe(res)
 
       res.write(`</div>
-      ${extractor.getScriptTags()}
+      ${scriptTags}
       </body>
       </html>`)
     },
@@ -75,27 +81,4 @@ export default async (locPath, store, context, devAssets, res) => {
       error = true
     }
   })
-
-  // setTimeout(abort, 10000)
-
-  // const helmet = helmetCtx.helmet
-
-  // return `<!doctype html>
-  //     <html>
-  //     <head>
-  //       ${helmet.title.toString()}
-  //       <meta name="robots" content="noindex,nofollow" />
-  //       <meta name="mobile-web-app-capable" content="yes">
-  //       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-  //       ${helmet.meta.toString()}
-  //       ${vendorStyleTag}
-  //       ${appStyleTag}
-  //       <link rel="canonical" href="https://www.myreactapp.com/" >
-  //       ${helmet.link.toString()}
-  //     </head>
-  //     <body>
-  //       <div id='root'>${content}</div>
-  //       ${extractor.getScriptTags()}
-  //     </body>
-  //     </html>`
 }
