@@ -2,6 +2,7 @@ import React, { useState, Suspense } from "react"
 import PropTypes from "prop-types"
 
 import "./HomeView.css"
+import { Link } from "react-router-dom"
 
 const HomeView = () => {
   const [count, setCount] = useState(0)
@@ -19,6 +20,15 @@ const HomeView = () => {
           >
             up count
           </button>
+          <Link
+            to="/404"
+            style={{
+              color: "white",
+              marginLeft: "20pt"
+            }}
+          >
+            go to 404
+          </Link>
         </div>
       </div>
     </Suspense>

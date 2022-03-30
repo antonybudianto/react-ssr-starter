@@ -2,5 +2,5 @@
   color: white;
   padding: 100px;
   background-size: cover;
-  background: url('./back.png');
+  background: url("./back.png");
 }

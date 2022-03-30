@@ -42,8 +42,9 @@ export default async (locPath, store, context, devAssets, res) => {
       console.log("--complete-shell")
     },
     onAllReady() {
-      console.log("--all-ready", error)
-      res.statusCode = error ? 500 : 200
+      console.log("--all-ready", error, context)
+      const statusCode = context.status ? context.status : 200
+      res.statusCode = error ? 500 : statusCode
       res.setHeader("Content-type", "text/html")
 
       if (error) {

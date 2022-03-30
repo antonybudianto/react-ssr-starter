@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Switch, Route } from "react-router-dom"
 
 import HomeView from "./Home"
@@ -11,9 +11,11 @@ export const getInitialData = (req, store) => {
 
 export default function initRenderRoutes() {
   return (
-    <Switch>
-      <Route exact path="/" component={HomeView} />
-      <Route exact path="**" component={NotFoundPage} />
-    </Switch>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={HomeView} />
+        <Route exact path="**" component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   )
 }
