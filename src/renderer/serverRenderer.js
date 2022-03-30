@@ -1,6 +1,5 @@
 import React from "react"
-// import { renderToString } from "react-dom/server"
-import { pipeToNodeWritable } from "react-dom/server"
+import { renderToPipeableStream } from "react-dom/server"
 
 import { StaticRouter } from "react-router-dom"
 import path from "path"
@@ -27,41 +26,56 @@ export default async (locPath, store, context, devAssets, res) => {
     </StaticRouter>
   )
 
-  const jsx = extractor.collectChunks(App)
-  // const content = renderToString(jsx)
+  const HEAD_SECTION = `<head>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  ${extractor.getStyleTags()}
+  <link rel="canonical" href="https://www.myreactapp.com/" >
+</head>`
 
-  const { startWriting, abort } = pipeToNodeWritable(jsx, res, {
-    onReadyToStream() {
-      // If something errored before we started streaming, we set the error code appropriately.
-      res.statusCode = 200
+  const jsx = extractor.collectChunks(App)
+  let error
+
+  const { pipe } = renderToPipeableStream(jsx, {
+    onCompleteShell() {
+      console.log("--complete-shell")
+    },
+    onAllReady() {
+      console.log("--all-ready", error)
+      res.statusCode = error ? 500 : 200
       res.setHeader("Content-type", "text/html")
+
+      if (error) {
+        res.send(`<!doctype html>
+        <html>
+        ${HEAD_SECTION}
+        <body><div id="root"></div>
+        <script>window.__ssrError=true;</script>${extractor.getScriptTags()}</body>
+        </html>`)
+        return
+      }
 
       res.write(`<!DOCTYPE html>
       <html>
-      <head>
-         <meta name="robots" content="noindex,nofollow" />
-         <meta name="mobile-web-app-capable" content="yes">
-         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-         ${extractor.getStyleTags()}
-         <link rel="canonical" href="https://www.myreactapp.com/" >
-       </head>
+      ${HEAD_SECTION}
       <body>
-      <div id="root">
-      `)
-      startWriting()
-      res.write(`${extractor.getScriptTags()}
-      </div>
+      <div id="root">`)
+
+      pipe(res)
+
+      res.write(`</div>
+      ${extractor.getScriptTags()}
       </body>
       </html>`)
     },
-    // onCompleteAll() {
-    // },
-    onError(x) {
-      console.error(x)
+    onShellError(x) {
+      console.log("--shell-error: ", x)
+      error = true
     }
   })
 
-  setTimeout(abort, 10000)
+  // setTimeout(abort, 10000)
 
   // const helmet = helmetCtx.helmet
 

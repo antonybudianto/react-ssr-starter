@@ -9,6 +9,8 @@ const HomeView = () => {
     <Suspense fallback={<div>spinner...</div>}>
       <div className="home-view">
         <div>home {count}</div>
+        {/* For toggling ssr error */}
+        {/* {a()} */}
         <div style={{ marginTop: "50px" }}>
           <button
             style={{ padding: "10px 15px" }}

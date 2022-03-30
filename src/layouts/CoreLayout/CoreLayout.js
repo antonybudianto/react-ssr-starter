@@ -6,7 +6,20 @@ import renderRoutes from "../../routes"
 import "./CoreLayout.css"
 
 class CoreLayout extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      error: false
+    }
+  }
+  componentDidCatch() {
+    this.setState({ error: true })
+  }
   render() {
+    if (this.state.error) {
+      return <div>Error</div>
+    }
     return (
       <div className="container text-center">
         <Helmet>

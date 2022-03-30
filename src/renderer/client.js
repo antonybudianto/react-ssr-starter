@@ -1,14 +1,17 @@
 import "raf/polyfill"
 import React from "react"
-import { createRoot } from "react-dom"
+import { hydrateRoot } from "react-dom/client"
 import { loadableReady } from "@loadable/component"
 
 import Root from "./root"
 import "basscss/css/basscss.css"
 
 function render(MyApp) {
-  const root = createRoot(document.querySelector("#root"))
-  root.render(<MyApp />)
+  hydrateRoot(document.querySelector("#root"), <MyApp />, {
+    onRecoverableError: e => {
+      console.log(e)
+    }
+  })
 }
 
 loadableReady(() => {

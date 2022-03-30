@@ -78,6 +78,10 @@ app.get(HOME_PATH + "(*)", (req, res) => {
   // attach cookies to store object as a way to let cookies to be passed into server fetching
   // req.headers.cookie && (store["cookies"] = req.headers.cookie)
   const path = req.path
+  if (path === "/favicon.ico") {
+    res.sendStatus(404)
+    return
+  }
   const promises = getInitialData(req, {})
   Promise.all(promises)
     .then(() => {
