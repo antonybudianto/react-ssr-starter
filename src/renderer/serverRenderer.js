@@ -43,9 +43,12 @@ export default async (locPath, store, context, devAssets, res) => {
 
   let error
 
+  /**
+   * https://github.com/reactwg/react-18/discussions/127
+   */
   const { pipe } = renderToPipeableStream(app, {
-    onCompleteShell() {
-      console.log("--complete-shell")
+    onShellReady() {
+      console.log("--shell-ready")
     },
     onAllReady() {
       console.log("--all-ready", error, context)
